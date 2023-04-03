@@ -50,7 +50,7 @@ exports.Login = async (req, res) => {
         prev = user[0].email;
 
         let diff1 = (new Date(Date.now()).getTime() - new Date(user[0].blockEndTime).getTime());
-        stamp1 = new Date(diff1);
+        let stamp1 = new Date(diff1);
 
         let c1 = stamp1.getHours();
         let c2 = stamp1.getMinutes();
@@ -102,7 +102,7 @@ exports.Login = async (req, res) => {
         }
 
         let diff = (new Date(Date.now()).getTime() - new Date(user[0].blockEndTime).getTime());
-        stamp = new Date(diff);
+        let stamp = new Date(diff);
 
         let t1 = stamp.getHours();
         let t2 = stamp.getMinutes();
