@@ -95,13 +95,13 @@ exports.Login = async (req, res) => {
         }
 
         let diff = (new Date(Date.now()).getTime() - new Date(user[0].blockEndTime).getTime());
-        let stamp = (diff / (60 * 60 * 1000))
+        let stamp = new Date(diff);
 
-        // let t1 = stamp.getHours();
-        // let t2 = stamp.getMinutes();
-        // let t3 = stamp.getSeconds();
+        let t1 = stamp.getHours();
+        let t2 = stamp.getMinutes();
+        let t3 = stamp.getSeconds();
 
-        // console.log(t1, t2, t3);
+        console.log(t1, t2, t3);
 
         if (t1 < 24 && user[0].consecutiveAttempts >= 5) {
 
