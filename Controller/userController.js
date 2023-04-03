@@ -55,7 +55,7 @@ exports.Login = async (req, res) => {
         let c1 = stamp1.getHours();
         let c2 = stamp1.getMinutes();
 
-        if (c2 >= 2 && user[0].consecutiveAttempts == 5) {
+        if (c1 >= 24 && user[0].consecutiveAttempts == 5) {
             user[0].consecutiveAttempts = 0;
             user[0].blockEndTime = null;
             user[0].blocked = false;
@@ -110,14 +110,14 @@ exports.Login = async (req, res) => {
 
         console.log(t1, t2, t3);
 
-        if (t2 < 2 && user[0].consecutiveAttempts >= 5) {
+        if (t1 < 24 && user[0].consecutiveAttempts >= 5) {
 
             res.status(401).json({
                 status: "fail",
                 message: `Your account has been blocked. Please try again after ${24 - t1} hours.`
             });
 
-        } else if (t2 >= 2) {
+        } else if (t1 >= 24 && user[0].consecutiveAttempts >= 5) {
             user[0].consecutiveAttempts = 0;
             user[0].blockEndTime = null;
             await user[0].save();
