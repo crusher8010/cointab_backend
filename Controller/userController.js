@@ -91,13 +91,7 @@ exports.Login = async (req, res) => {
                     status: "fail",
                     message: 'Invalid email or password'
                 })
-            } else {
-                return res.status(401).json({
-                    status: "fail",
-                    message: 'Your account has been blocked. Please try again after 24 hours.'
-                })
             }
-
         }
 
         let diff = (new Date(Date.now()).getTime() - new Date(user[0].blockEndTime).getTime());
