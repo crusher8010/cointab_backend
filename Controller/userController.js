@@ -107,6 +107,7 @@ exports.Login = async (req, res) => {
 
             res.status(401).json({
                 status: "fail",
+                stamp,
                 t1,
                 message: `Your account has been blocked. Please try again after ${24 - t1} hours.`
             });
