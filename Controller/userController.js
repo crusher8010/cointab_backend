@@ -94,7 +94,7 @@ exports.Login = async (req, res) => {
             }
         }
 
-        let diff = (new Date(Date.now()).getTime() - new Date(user[0].blockEndTime).getTime());
+        let diff = (new Date(Date.now()).getTime() - (user[0].blockEndTime.getTime()));
         let stamp = new Date(diff);
 
         let t1 = stamp.getHours();
