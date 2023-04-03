@@ -53,7 +53,6 @@ exports.Login = async (req, res) => {
         let stamp1 = new Date(diff1);
 
         let c1 = stamp1.getHours();
-        let c2 = stamp1.getMinutes();
 
         if (c1 >= 24 && user[0].consecutiveAttempts == 5) {
             user[0].consecutiveAttempts = 0;
@@ -114,6 +113,7 @@ exports.Login = async (req, res) => {
 
             res.status(401).json({
                 status: "fail",
+                t1,
                 message: `Your account has been blocked. Please try again after ${24 - t1} hours.`
             });
 
