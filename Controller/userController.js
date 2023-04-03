@@ -105,6 +105,7 @@ exports.Login = async (req, res) => {
 
         } else if (stamp >= 24 && user[0].consecutiveAttempts >= 5) {
             user[0].consecutiveAttempts = 0;
+            user[0].blocked = false;
             user[0].blockEndTime = null;
             await user[0].save();
 
