@@ -54,7 +54,6 @@ exports.Login = async (req, res) => {
 
         let c1 = stamp1.getHours();
         let c2 = stamp1.getMinutes();
-        let c3 = stamp1.getSeconds();
 
         if (c2 >= 2 && user[0].consecutiveAttempts == 5) {
             user[0].consecutiveAttempts = 0;
