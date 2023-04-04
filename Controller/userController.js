@@ -51,8 +51,8 @@ exports.Login = async (req, res) => {
 
         let diff1 = (new Date(user[0].blockEndTime).getTime() - new Date(Date.now()).getTime())
         let stamp1 = diff1 / (60 * 60 * 1000)
-
-        if (stamp1 >= 24 && user[0].consecutiveAttempts == 5) {
+        console.log(stamp1)
+        if (stamp1 < 0 && user[0].consecutiveAttempts == 5) {
             user[0].consecutiveAttempts = 0;
             user[0].blockEndTime = null;
             user[0].blocked = false;
@@ -74,7 +74,7 @@ exports.Login = async (req, res) => {
 
                 await user[0].save();
 
-                if (user[0].consecutiveAttempts === 5) {
+                if (user[0].consecutiveAttempts >= 5) {
                     user[0].blocked = true;
                     user[0].blockEndTime = new Date(Date.now() + 24 * 60 * 60 * 1000);
                     await user[0].save();
@@ -100,10 +100,10 @@ exports.Login = async (req, res) => {
             res.status(401).json({
                 status: "fail",
                 stamp,
-                message: `Your account has been blocked. Please try again after ${stamp} hours.`
+                message: `Your account has been blocked. Please try again after ${Math.round(stamp)} hours.`
             });
 
-        } else if (stamp >= 24 && user[0].consecutiveAttempts >= 5) {
+        } else if (stamp < 0 && user[0].consecutiveAttempts >= 5) {
             user[0].consecutiveAttempts = 0;
             user[0].blocked = false;
             user[0].blockEndTime = null;
